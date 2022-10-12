@@ -8,4 +8,4 @@ router = APIRouter(
 
 @router.get("/")
 def healthcheck():
-    return {{"status": "Working"}}
+    return {"status": "Working Docker"}
