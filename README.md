@@ -31,5 +31,5 @@ docker build -t appimage .
 ```
 5. Run the project
 ```
-$ docker run -p 8000:8000 appimage
+$ docker сompose-up
 ```
