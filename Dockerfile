@@ -11,7 +11,6 @@ WORKDIR /code
 COPY poetry.lock pyproject.toml /code/
 RUN pip install poetry
 RUN poetry install
-RUN pip install redis
 COPY . .
 
 EXPOSE 8000
