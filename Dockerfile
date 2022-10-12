@@ -7,8 +7,8 @@ ENV PYTHONUNBUFFERED=1 \
     POETRY_VERSION=1.2.2 \
     POETRY_VIRTUALENVS_CREATE=false \
     POETRY_CACHE_DIR='/var/cache/pypoetry'
-WORKDIR /meduzzen
-COPY poetry.lock pyproject.toml /meduzzen/
+WORKDIR /code
+COPY poetry.lock pyproject.toml /code/
 RUN pip install poetry
 RUN poetry install
 COPY . .
