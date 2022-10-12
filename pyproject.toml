@@ -13,6 +13,9 @@ psycopg2-binary = "^2.9.4"
 python-decouple = "^3.6"
 FastAPI-SQLAlchemy = "^0.2.1"
 python-dotenv = "^0.21.0"
+databases = "^0.6.1"
+asyncpg = "^0.26.0"
+redis = "^4.3.4"
 
 [tool.poetry.dev-dependencies]
 
