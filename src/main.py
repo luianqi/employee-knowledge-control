@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
 from src import healthcheck
+from src.database import database
 
 app = FastAPI()
 
@@ -17,4 +18,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+# database connect
+@app.on_event("startup")
+async def connect():
+    await database.connect()
+
+
+@app.on_event("shutdown")
+async def shutdown():
+    await database.disconnect()
 
