@@ -37,7 +37,6 @@ class UserInDBBase(UserBase):
 
 
 class UsersList(BaseModel):
-    id: int
     users: List[UserBase]
 
     class Config:
