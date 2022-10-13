@@ -25,11 +25,25 @@ source venv/bin/activate
 ```
 Poetry install 
 ```
-4. Build the Docker Image
+
+4. Create a new PostgreSQL database
+
+ In your terminal:
+```
+psql postgres
+CREATE DATABASE databasename
+\c databasename
+```
+5. Run migration 
+```
+alembic revision --autogenerate -m "New Migration"
+alembic upgrade head
+```
+6. Build the Docker Image
 ```
 docker build -t appimage .
 ```
-5. Run the project
+7. Run the project
 ```
 $ docker сompose-up
 ```
