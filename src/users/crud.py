@@ -1,3 +1,5 @@
+from fastapi import HTTPException
+
 from src.database import database
 from src.users import schemas
 from src.users.models import users
@@ -50,7 +52,8 @@ async def deleteUser(id: int):
     """
     query = users.delete().where(users.c.id == id)
     await database.execute(query)
-    return {"status": "User with id: {} deleted successfully!".format(id)}
+    return HTTPException(status_code=204,
+                         detail="User with id: {} deleted successfully!".format(id))
 
 
 async def usersList(skip: int = 0, take: int = 100):
