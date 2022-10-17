@@ -48,12 +48,6 @@ async def deleteUser(id: int):
 
 
 
-# @router.post("/signin/")
-# async def signIn(request: schemas.UserSignIn):
-#     if not Hash.verify():
-#         raise HTTPException(status_code=404, detail=f"Incorrect password")
-#
-#     return {"status": "Successfully signed in!"}
 
 
 
