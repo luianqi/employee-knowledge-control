@@ -12,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.post("/signup/", response_model=schemas.UserBase)
+@router.post("/signup/", response_model=schemas.UserResponse)
 async def signUp(request: schemas.UserSignUp):
     db_user = await crud.get_user_by_email(email=request.email)
     if db_user:
@@ -25,7 +25,7 @@ async def usersList(skip: int = 0, take: int = 100):
     return await crud.usersList(skip=skip, take=take)
 
 
-@router.patch("/{user_id}/")
+@router.patch("/{user_id}/", response_model=schemas.UserResponse)
 async def updateUser(id: int, request: schemas.UserUpdate):
     db_user = await crud.get_user_by_id(id=id)
     if not db_user:
