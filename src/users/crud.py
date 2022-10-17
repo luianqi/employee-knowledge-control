@@ -1,3 +1,5 @@
+from typing import Optional
+
 from fastapi import HTTPException
 
 from src.database import database
@@ -6,26 +8,26 @@ from src.users.models import users
 from src.users.services import Hash
 
 
-async def signUp(request: schemas.UserSignUp):
-    """
-    Method for user to sign up
+async def signUp(request: schemas.UserSignUp) -> Optional[users]:
+        """
+        Method for user to sign up
 
-    :param request: UserSignUp schema, post body
-    :return: created user
+        :param request: UserSignUp schema, post body
+        :return: created user
 
-    """
-    query = users.insert().values(
-        first_name=request.first_name,
-        last_name=request.last_name,
-        email=request.email,
-        password=Hash.bcrypt(request.password),
-    )
+        """
+        query = users.insert().values(
+            first_name=request.first_name,
+            last_name=request.last_name,
+            email=request.email,
+            password=Hash.bcrypt(request.password),
+        )
 
-    user_id = await database.execute(query)
-    return {**request.dict(), "id": user_id}
+        user_id = await database.execute(query)
+        return {**request.dict(), "id": user_id}
 
 
-async def updateUser(id: int, request: schemas.UserUpdate):
+async def updateUser(id: int, request: schemas.UserUpdate) -> Optional[users]:
     """
     Method for updating the existing user
 
@@ -56,7 +58,7 @@ async def deleteUser(id: int):
                          detail="User with id: {} deleted successfully!".format(id))
 
 
-async def usersList(skip: int = 0, take: int = 100):
+async def usersList(skip: int = 0, take: int = 100) -> Optional[users]:
     """
     Method for listing all users
 
@@ -69,7 +71,7 @@ async def usersList(skip: int = 0, take: int = 100):
         users.select().offset(skip).limit(take))
 
 
-async def get_user_by_email(email: str):
+async def get_user_by_email(email: str) -> Optional[users]:
     """
     Method for getting user by his email
 
@@ -82,7 +84,7 @@ async def get_user_by_email(email: str):
     )
 
 
-async def get_user_by_id(id: str):
+async def get_user_by_id(id: int) -> Optional[users]:
     """
     Method for getting user by his id
 
