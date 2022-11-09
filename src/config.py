@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     REDIS_HOST: str
     REDIS_POST: int
     REDIS_DB: int
+    SECRET_KEY: str
 
     class Config:
         env_file = ".env"
