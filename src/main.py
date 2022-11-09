@@ -1,14 +1,12 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from src import healthcheck
 from src.database import database
 from src.users import routes
 
 app = FastAPI()
 
 # routers
-app.include_router(healthcheck.router)
 app.include_router(routes.router)
 
 # cors
