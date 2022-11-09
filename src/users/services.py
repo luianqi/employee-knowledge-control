@@ -1,11 +1,18 @@
-from passlib.context import CryptContext
+from typing import List
 
-pwd_cxt = CryptContext(schemes=["bcrypt"], deprecated="auto")
+from fastapi import Depends, HTTPException
+
+from src.users.dependencies import CurrentUsers
+from src.users.schemas import UserBase
 
 
-class Hash():
-    def bcrypt(password: str):
-        return pwd_cxt.hash(password)
+class RoleChecker:
+    def __init__(self, allowed_roles: List):
+        self.allowed_roles = allowed_roles
 
-    def verify(hashed_password, plain_password):
-        return pwd_cxt.verify(plain_password, hashed_password)
+    def __call__(self, user: UserBase = Depends(CurrentUsers.get_current_user)):
+        if user.role not in self.allowed_roles:
+            raise HTTPException(status_code=403, detail="Operation not permitted")
+
+
+allowed_users = RoleChecker(["user", "admin", "owner"])
