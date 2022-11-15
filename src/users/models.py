@@ -1,18 +1,27 @@
-from sqlalchemy import Table, Column, Integer, String, Boolean, Enum
+from sqlalchemy import Column, Integer, String, Boolean, Enum
 
-from src.database import metadata
+from src.database import Base
 from src.users.schemas import Roles
 
-users = Table(
-    "users",
-    metadata,
-    Column("id", Integer, primary_key=True),
-    Column("first_name", String),
-    Column("last_name", String),
-    Column("email", String, unique=True, index=True),
-    Column("password", String),
-    Column("role", Enum(Roles), default="user"),
-    Column("is_active", Boolean, default=True)
-)
+
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    first_name = Column(String)
+    last_name = Column(String)
+    email = Column(String, unique=True, index=True)
+    password = Column(String)
+    role = Column(Enum(Roles), default="user")
+    is_active = Column(Boolean, default=True)
+
+
+
+
+
+
+
+
+
+
 
 
